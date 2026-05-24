@@ -1,0 +1,40 @@
+title: David Morgan
+description: >-
+  Notes on AI, engineering, and the bottlenecks that have moved.
+author: David Morgan
+email: davidjmorgan26@gmail.com
+
+baseurl: ""
+url: "https://djmorgan26.github.io"
+
+github_username: djmorgan26
+linkedin_username: davidjmorgan26
+
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Build settings
+markdown: kramdown
+permalink: /:year/:month/:day/:title.html
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# What Jekyll should not build
+exclude:
+  - CLAUDE.md
+  - SETUP.md
+  - source/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .bundle/

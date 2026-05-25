@@ -17,14 +17,14 @@ AI-native engineer shipping at the bleeding edge of agentic tooling — Claude C
 ## Experience
 
 ### AT&T — Senior Data/AI Engineer, Chief Data Office
-*Alpharetta, GA · Feb 2026 – Present*
+*Atlanta, GA · Feb 2026 – Present*
 
 - Designed a **self-improving migration platform** for the Network organization — rulebook-driven agents, skills, and MCP servers with automated feedback loops that compound institutional knowledge across hundreds of legacy tool migrations, replacing one-off AI-assisted work.
 - Architected **5G Experience Pass (5GEP)**, a real-time geospatial event-orchestration platform managing venues, geofences, events, and connected services to deliver priority cellular connectivity at large-scale partnered events.
 - Selected as **design partner for Koda**, AT&T's internal AI coding tool — worked 1-on-1 with the lead developer providing structured product feedback informed by deep day-to-day use of Claude Code, Copilot, and Windsurf.
 
 ### AT&T — Technical Development Program, Chief Data Office
-*Alpharetta, GA · 2024 – 2026*
+*Atlanta, GA · 2024 – 2026*
 
 - Architected and delivered **AndiSense** as sole developer, replacing a commercial vendor to realize **$3M+ annual savings** — full-stack (React/TypeScript, FastAPI, PostgreSQL) on Azure with CI/CD and AI-powered document ingestion.
 - Rebuilt **NAAP (National Access Analytics Platform)** as sole developer (React + Vite, FastAPI, MongoDB) — backbone of the team's data pipeline supporting **$52M+ in reported business benefits** with hundreds of production commits.

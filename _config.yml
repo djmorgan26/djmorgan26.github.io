@@ -10,8 +10,6 @@ url: "https://djmorgan26.github.io"
 github_username: djmorgan26
 linkedin_username: davidjmorgan26
 
-theme: minima
-
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -38,3 +36,5 @@ exclude:
   - README.md
   - vendor/
   - .bundle/
+  - _design-preview.html
+  - resume-pdf-source.html

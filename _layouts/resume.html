@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<article class="resume">
+  <header class="resume-head">
+    <div class="resume-head-row">
+      <h1 class="resume-name">David Morgan</h1>
+      {%- if page.pdf %}
+      <a class="resume-download" href="{{ page.pdf | relative_url }}" download>Download PDF</a>
+      {%- endif %}
+    </div>
+    <p class="resume-contact">
+      Alpharetta, GA
+      <span class="sep">·</span> <a href="mailto:davidjmorgan26@gmail.com">davidjmorgan26@gmail.com</a>
+      <span class="sep">·</span> <a href="https://linkedin.com/in/davidjmorgan26">LinkedIn</a>
+      <span class="sep">·</span> <a href="https://github.com/djmorgan26">GitHub</a>
+    </p>
+  </header>
+
+  <div class="resume-body">
+    {{ content }}
+  </div>
+</article>

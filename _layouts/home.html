@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<div class="home">
+  <h1 class="home-hero">{{ page.hero | default: site.description }}</h1>
+  {%- if page.intro -%}
+  <p class="home-intro">{{ page.intro }}</p>
+  {%- endif -%}
+
+  {%- if page.content != "" -%}
+  <div class="home-note">{{ content }}</div>
+  {%- endif -%}
+
+  <section class="post-list">
+    {%- for post in site.posts -%}
+    <article class="post-item">
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <h2 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}
+        <a class="read-more" href="{{ post.url | relative_url }}">Read&nbsp;→</a>
+      </p>
+    </article>
+    {%- endfor -%}
+  </section>
+</div>

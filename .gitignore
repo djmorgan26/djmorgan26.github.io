@@ -16,3 +16,8 @@ source/
 CLAUDE.md
 # Unpublished drafts stay local until reviewed and moved into _posts/.
 _drafts/
+
+# Local-only design mockup (4-variant theme picker). Not for the live site.
+_design-preview.html
+# Local-only source HTML used to render the downloadable resume PDF.
+resume-pdf-source.html

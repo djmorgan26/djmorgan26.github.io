@@ -1,0 +1,14 @@
+name = "ask-david"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+workers_dev = true
+
+# Cloudflare Workers AI — free built-in model, no third-party key.
+[ai]
+binding = "AI"
+
+# KV namespace used for per-IP rate limiting.
+# `id` is filled in after `wrangler kv namespace create RL`.
+[[kv_namespaces]]
+binding = "RL"
+id = "453d794cc3c64bafb32071b37a2d6ecb"

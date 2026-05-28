@@ -10,6 +10,10 @@ url: "https://djmorgan26.github.io"
 github_username: djmorgan26
 linkedin_username: davidjmorgan26
 
+# "Ask David" chatbot — Cloudflare Worker endpoint.
+# Leave blank to hide the widget. Set to the deployed Worker's /chat URL.
+chatbot_endpoint: "https://ask-david.djmorgan26.workers.dev/chat"
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag

@@ -48,5 +48,9 @@
       });
     })();
   </script>
+
+  {%- comment -%} "Ask David" chatbot widget — hidden automatically if chatbot_endpoint is unset {%- endcomment -%}
+  <div id="chatbot-root" data-endpoint="{{ site.chatbot_endpoint }}"></div>
+  <script src="{{ '/assets/js/chatbot.js' | relative_url }}" defer></script>
 </body>
 </html>

@@ -216,14 +216,16 @@ a:hover { color: var(--accent-2); }
 }
 .page .post-headline { margin-top: 0; }
 
-.headshot {
+/* high specificity so the generic `.post-body img` rule can't flatten the
+   circle into a rounded-rectangle thumbnail */
+.post-body img.headshot {
   display: block;
-  width: 156px;
-  height: 156px;
+  width: 188px;
+  height: 188px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 30% 35%;
-  margin: 4px 0 28px;
+  object-position: 50% 30%;
+  margin: 6px 0 30px;
   border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
@@ -478,6 +480,10 @@ a:hover { color: var(--accent-2); }
   .brand { font-size: 17px; white-space: nowrap; }
   .site-nav { gap: 12px; }
   .site-nav a { font-size: 13.5px; }
+  /* let the header drop the nav onto its own row before it can overflow
+     (kicks in only when brand + nav no longer fit, e.g. ≤360px phones) */
+  .site-header .bar { flex-wrap: wrap; row-gap: 4px; }
+  .site-nav { margin-left: auto; }
 }
 
 /* ============================================================

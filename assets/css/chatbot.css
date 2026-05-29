@@ -297,7 +297,7 @@
 .cb-input::placeholder { color: var(--muted); }
 .cb-send {
   flex: none;
-  width: 42px; height: 42px;
+  width: 44px; height: 44px;
   border-radius: 999px;
   border: none;
   background: var(--accent);
@@ -327,6 +327,21 @@
     border-radius: 0;
     border: none;
   }
+  /* respect the notch / status bar and the home-indicator safe areas */
+  .cb-header { padding-top: calc(16px + env(safe-area-inset-top)); }
+  .cb-composer { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+  /* 16px input font stops iOS Safari from auto-zooming on focus */
+  .cb-input { font-size: 16px; }
+  /* roomier touch targets on touch devices */
+  .cb-send { width: 46px; height: 46px; }
+  .cb-icon-btn { width: 40px; height: 40px; }
+  .cb-chip { padding: 10px 15px; }
+  .cb-action-btn { padding: 9px 15px; }
+}
+
+/* keep the launcher clear of the home indicator on notched phones */
+@media (max-width: 600px) {
+  .cb-launcher { bottom: calc(24px + env(safe-area-inset-bottom)); }
 }
 
 /* ---- reduced motion ---- */

@@ -134,6 +134,9 @@
     return html;
   }
   // Renders bot text + [[button:Label|url]] / [[card:Title|desc|url]] markers.
+  // Trailing markers (nothing but whitespace and other markers after) become
+  // buttons/cards below the message. Markers mid-sentence become inline links,
+  // so a model mistake never leaves a broken fragment like "you can email him at."
   function renderBot(raw) {
     var display = String(raw);
     // Hide an incomplete trailing marker mid-stream so "[[butt" never flashes.
@@ -144,20 +147,59 @@
     var cards = [];
     var buttons = [];
     var markerRe = /\[\[(button|card):([^\]]+)\]\]/g;
+
+    // First pass: find every marker and decide button-vs-inline.
+    var found = [];
     var m;
     while ((m = markerRe.exec(display))) {
-      var parts = m[2].split("|");
-      if (m[1] === "button" && parts.length >= 2) {
-        var bu = safeUrl(parts[1]);
-        if (bu) buttons.push({ label: parts[0].trim(), url: bu });
-      } else if (m[1] === "card" && parts.length >= 3) {
-        var cu = safeUrl(parts[2]);
-        if (cu) cards.push({ title: parts[0].trim(), desc: parts[1].trim(), url: cu });
+      found.push({ start: m.index, end: markerRe.lastIndex, type: m[1], body: m[2] });
+    }
+    // A marker is "terminal" if everything after it is whitespace OR another marker.
+    var terminalRe = /^(\s*\[\[(?:button|card):[^\]]+\]\]\s*)*$/;
+    for (var i = 0; i < found.length; i++) {
+      found[i].terminal = terminalRe.test(display.slice(found[i].end));
+    }
+
+    // Build the prose: walk through display, emitting markdown-ish text for
+    // non-terminal markers (so they stay in the sentence) and dropping
+    // terminal ones (they will render below as buttons/cards).
+    var prose = "";
+    var cursor = 0;
+    for (var j = 0; j < found.length; j++) {
+      var f = found[j];
+      prose += display.slice(cursor, f.start);
+      cursor = f.end;
+      if (f.terminal) {
+        if (f.type === "button") {
+          var bp = f.body.split("|");
+          if (bp.length >= 2) {
+            var bu = safeUrl(bp[1]);
+            if (bu) buttons.push({ label: bp[0].trim(), url: bu });
+          }
+        } else if (f.type === "card") {
+          var cp = f.body.split("|");
+          if (cp.length >= 3) {
+            var cu = safeUrl(cp[2]);
+            if (cu) cards.push({ title: cp[0].trim(), desc: cp[1].trim(), url: cu });
+          }
+        }
+        // Drop the marker from the prose; it renders below.
+      } else {
+        // Inline: keep the sentence whole by emitting a markdown-style link.
+        var parts = f.body.split("|");
+        if (f.type === "button" && parts.length >= 2) {
+          var bu2 = safeUrl(parts[1]);
+          if (bu2) prose += "[" + parts[0].trim() + "](" + bu2 + ")";
+        } else if (f.type === "card" && parts.length >= 3) {
+          var cu2 = safeUrl(parts[2]);
+          if (cu2) prose += "[" + parts[0].trim() + "](" + cu2 + ")";
+        }
       }
     }
-    var textOnly = display
-      .replace(markerRe, "")
-      .replace(/[ \t]+([.,!?;:])/g, "$1") // tidy orphaned space left by a removed inline marker
+    prose += display.slice(cursor);
+
+    var textOnly = prose
+      .replace(/[ \t]+([.,!?;:])/g, "$1")
       .replace(/[ \t]{2,}/g, " ")
       .trim();
     var html = textOnly ? renderTextBlocks(textOnly) : "";

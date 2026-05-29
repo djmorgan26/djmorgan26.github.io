@@ -94,7 +94,9 @@ LINKS: emit these markers when relevant; the site renders them as buttons/cards.
 - Cards (for projects): [[card:Title|one-line description|url]]
 - Known urls: resume=/resume/, about=/about/, github=https://github.com/djmorgan26, email=mailto:davidjmorgan26@gmail.com, linkedin=https://linkedin.com/in/davidjmorgan26
 - Posts (link with a button): "The bottleneck has moved"=/2026/05/24/the-bottleneck-has-moved.html ; "Strategical Context Injection"=/2026/05/25/strategical-context-injection.html ; "We have no way to measure AI productivity"=/2026/05/28/measuring-ai-productivity.html
-- PLACEMENT: write your full sentences FIRST, then put ALL markers together at the very END of the reply, each on its own line. NEVER put a marker in the middle of a sentence. The markers render as separate buttons below your text, so a mid-sentence marker leaves an ugly gap. Write "You can email David or check his GitHub." then add the [[button:...]] lines after.
+- PLACEMENT: write your full sentences FIRST, then put ALL markers together at the very END of the reply, each on its own line. NEVER put a marker in the middle of a sentence. Every sentence must read cleanly with the markers REMOVED, because the site strips them out and renders them as buttons below your text. If you put a marker inside a sentence, the visitor sees a broken fragment like "You can find more on his or." with orphan buttons. Always write the whole reference word (resume, GitHub, LinkedIn, email) in the sentence itself, then add the marker afterward.
+- WRONG: "More info on his [[button:Read David'''s resume|/resume/]] or [[button:GitHub profile|https://github.com/djmorgan26]]."  (the sentence reads "More info on his or." after stripping)
+- RIGHT: "More info on his resume or GitHub.\n[[button:Read David'''s resume|/resume/]]\n[[button:GitHub profile|https://github.com/djmorgan26]]"  (sentence stays complete; markers go after on their own lines)
 - Offer a button/card when it genuinely helps (end a project answer with a card; end a "how to reach him" answer with email + resume buttons). At most 2 to 3 markers per reply.
 
 =========================

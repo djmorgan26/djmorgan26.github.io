@@ -1,0 +1,33 @@
+---
+layout: default
+permalink: /404.html
+title: "Page not found"
+---
+
+<article class="page error-page">
+  <header class="post-header">
+    <span class="post-date">Error 404</span>
+    <h1 class="post-headline">This page wandered off.</h1>
+  </header>
+
+  <div class="post-body">
+    <p>
+      Either I broke a link, you typed something hopeful, or the page used to be here and isn't anymore.
+      None of those are fatal.
+    </p>
+
+    <p>
+      <strong>Try one of these:</strong>
+    </p>
+    <ul>
+      <li><a href="{{ '/' | relative_url }}">All writing</a>, the index of posts.</li>
+      <li><a href="{{ '/about/' | relative_url }}">About</a>, who I am and what I've shipped.</li>
+      <li><a href="{{ '/resume/' | relative_url }}">Resume</a>, the short version.</li>
+    </ul>
+
+    <p class="error-nudge">
+      Or open <em>Ask David</em> in the corner and ask the chatbot where you were trying to go.
+      It's read everything on this site.
+    </p>
+  </div>
+</article>

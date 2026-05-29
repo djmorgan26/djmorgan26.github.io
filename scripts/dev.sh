@@ -49,7 +49,7 @@ start_container() {
     -v "$ROOT":/srv/jekyll -w /srv/jekyll \
     -e BUNDLE_PATH=/srv/jekyll/vendor/bundle \
     "$IMAGE" \
-    bash -c "gem install bundler -N --silent && bundle install && bundle exec jekyll serve --host 0.0.0.0 --force_polling --drafts --future" >/dev/null
+    bash -c "gem install bundler -N --silent && bundle install && bundle exec jekyll serve --host 0.0.0.0 --force_polling" >/dev/null
 }
 
 wait_for_site() {

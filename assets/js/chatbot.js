@@ -354,6 +354,18 @@
   launcher.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
   clearBtn.addEventListener("click", clearChat);
+  // Close the panel when the user clicks any link inside the chat that
+  // causes navigation (action buttons, cards, the footer email link, etc.),
+  // so the destination page isn't covered by the auto-restored panel.
+  // Exceptions: in-page anchors (#...) and target="_blank" links.
+  panel.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[href]");
+    if (!a) return;
+    var href = a.getAttribute("href") || "";
+    if (href.charAt(0) === "#") return;
+    if (a.target === "_blank") return;
+    close();
+  });
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     send(input.value);

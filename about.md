@@ -12,9 +12,11 @@ The thing I care about is the combination. I live at the front of the AI-tooling
 
 This page is the longer version of my [resume]({{ '/resume/' | relative_url }}): the work, the projects I build on my own time, and what I'm looking for next.
 
-## What I build at AT&T
+## At AT&T
 
-I tend to take on the thing nobody else has untangled yet, ship it end-to-end, and then turn it into something the rest of the org can reuse.
+I started at AT&T in the Technology Development Program in 2024 and moved into a Senior Data/AI Engineer role in the Chief Data Office in early 2026. The pattern across both has been the same: take on the thing nobody else has untangled yet, ship it end-to-end, then turn it into something the rest of the org can reuse.
+
+### Platforms I've built
 
 - **AndiSense.** An AI document-analysis platform I architected and delivered as sole developer, replacing a commercial vendor and saving $3M+ annually. Full-stack React/TypeScript + FastAPI + PostgreSQL on Azure, with AI-powered document ingestion and synthesis. AT&T's CTO highlighted it on the company's 150th-anniversary livestream as the kind of thinking and execution AT&T should look for in future leaders.
 - **NAAP (National Access Analytics Platform).** A data-analytics platform I rebuilt from scratch as sole developer (React + Vite, FastAPI, MongoDB). Hundreds of production commits; it became the backbone of my team's data pipeline and supports $52M+ in reported business benefits.
@@ -22,17 +24,25 @@ I tend to take on the thing nobody else has untangled yet, ship it end-to-end, a
 - **A self-improving migration platform.** Brought in by the network org to fix how hundreds of legacy tools were being migrated. Earlier AI-assisted attempts were one-off and lost their value between migrations. I built a rulebook-driven system of agents, skills, and MCP servers with automated feedback loops, so each migration makes the next one easier instead of starting from zero.
 - **Data-platform reliability work.** Led the Databricks Runtime upgrade (10.3 to 15.4 LTS) and validated the Unity Catalog migration across stage and prod, then layered automated data-freshness checks and cluster cost-tagging on top. Troubleshooting time dropped from days to hours; silent failures stopped slipping past us.
 
-## Adjacent work at AT&T
+### Tooling and teaching
 
 Some of the highest-leverage things I do at AT&T aren't single platforms. They're tooling and teaching that change how other engineers ship.
 
-- **AI-coding archetypes.** One of our VPs built AT&T's internal archetype system (close cousins to agent skills). I helped shape its early direction (he took some of my advice), then contributed to several of the archetypes and built a few of my own that other engineers across AT&T have used. Four of mine landed as merged PRs: parallel agents via git worktrees, automated Playwright demos, git-history secret remediation, and a meta-archetype for building more archetypes.
-- **AI coding-standards tool.** I built a personal project to make AI-generated code conform to AT&T's internal standards. Matt Dugan (VP) incorporated elements of it into a broader production system that's contributed to millions in AT&T-wide productivity gains. The original tool was mine; the production system is his.
+- **AI-coding archetypes and standards.** I built a personal project to make AI-generated code conform to AT&T's internal standards. A VP on our side pulled elements of it into a broader production archetype system (close cousins to agent skills) that's contributed to millions in AT&T-wide productivity gains. The original tool was mine; the production system is his. I helped shape its early direction, then contributed to several of the archetypes and built a few of my own that other engineers across AT&T have used. Four of mine landed as merged PRs: parallel agents via git worktrees, automated Playwright demos, git-history secret remediation, and a meta-archetype for building more archetypes.
 - **Koda design partnership.** Selected as an early adopter and design partner for Koda, AT&T's internal AI coding tool. I worked 1-on-1 with the lead developer through the early-stage phase, providing structured feedback informed by daily use of Claude Code, Copilot, and Windsurf. I was also part of a ~25-person external design-partner cohort at Windsurf in the same window.
 - **AI-Fueled Coding (AIFC) Lunch & Learn.** Delivered the CDO's AIFC Lunch & Learn, where I laid out the day-to-day workflows that make this stuff actually productive instead of cosmetically impressive. Inside the org I'm the go-to person for it, which mostly means showing up to someone's stuck workflow and pairing through it. One example was unblocking a colleague's Power BI / Copilot / Power Automate pipeline that had been stuck for weeks; another was bootstrapping a Databricks Unity Catalog access dashboard with reusable Azure CLI skills and an enrichment integration into AT&T's directory.
 - **Q2 GenAI Hackathon (top three).** Solo-built a network-analytics chatbot using locally-hosted Ollama LLMs. First time I'd built anything around fully-local inference; the experience is most of what got me serious about the gateway/edge story I write about now.
 
-## How the work has landed
+### Cross-org and program work
+
+Some of the things I'm proudest of were the org-level work I picked up alongside the platforms.
+
+- **Multi-Business-Partner ownership.** I was the only ATL TDP supporting multiple Business Partners at once, running parallel product-owner, developer, DevOps, and architect streams across different initiatives. It's most of what taught me how to actually ship inside the org.
+- **Enterprise calendar and event-management tool.** Built ~95% of a Power Automate system used daily by 100+ TDP members in Atlanta. After leadership picked it up, it's being expanded into the national TDP program.
+- **Microsoft Platforms Committee.** Led the committee solo after my co-lead departed, running training and Lunch-and-Learn events on Azure, Power Platform, and Microsoft 365 for the cohort.
+- **CDO Capture-The-Flag.** First-time CTF participant; my team placed top-tier mostly by leaning hard on AI tooling to compensate for our inexperience. The lesson was about applying AI outside its usual lane.
+
+### How the work has landed
 
 A few markers that the work is actually landing: 5/5 ratings on both performance dimensions in my year-end review with a formal *Role Model* designation; VP-level recognition over the same period (Connection Award, YouDeserve award and bonus, First Star); the CTO callout on the 150th-anniversary livestream mentioned above; and internal job offers across multiple AT&T orgs, one of which became my current Senior Data/AI Engineer role in February 2026. The point isn't the awards; it's that the work is being measured and the measurements line up.
 

@@ -191,7 +191,8 @@
 .cb-msg p { margin: 0 0 8px; }
 .cb-msg p:last-child { margin-bottom: 0; }
 .cb-msg a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 2px; }
-.cb-msg.bot a:hover { color: var(--accent); }
+.cb-msg .cb-action-btn, .cb-msg .cb-card { text-decoration: none; }
+.cb-msg.bot a:not(.cb-action-btn):not(.cb-card):hover { color: var(--accent); }
 .cb-msg ul { margin: 6px 0; padding-left: 1.1em; }
 .cb-msg li { margin: 3px 0; }
 .cb-msg li::marker { color: var(--accent); }

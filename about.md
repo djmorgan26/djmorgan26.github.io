@@ -4,6 +4,8 @@ title: About
 permalink: /about/
 ---
 
+<img src="{{ '/assets/img/headshot.jpg' | relative_url }}" alt="David Morgan" class="headshot">
+
 I'm a full-stack engineer at AT&T's Chief Data Office. I build production AI systems — orchestration platforms, agent tooling, document-ingestion pipelines — inside a company where security, compliance, and stakeholder management are not optional.
 
 The thing I care about is the combination. I live at the front of the AI-tooling curve: early MCP adopter, design partner for AT&T's internal AI coding tool, part of a ~25-person design-partner cohort at Windsurf, and the go-to person for AI-fueled coding across the CDO. But I do that *while* shipping real work at enterprise scale. Most engineers I meet have one side or the other. I'm trying to be good at both, and this site is where I write about what that's taught me.
@@ -24,10 +26,10 @@ I tend to take on the thing nobody else has untangled yet, ship it end-to-end, a
 
 I build a lot of small things to keep my intuitions sharp. The breadth is deliberate — it's how I learn what these tools can and can't actually do.
 
+- **PrintGen** — an AI 3D-print marketplace: text- and image-to-3D generation feeding a local Bambu Lab printer pipeline that slices and prints over the LAN. The fun of it is crossing the software-to-physical-hardware boundary.
 - **Hybrid Quantum-Classical Starter Kit** — a working implementation of the variational hybrid pattern (a classical optimizer driving short quantum circuits), the same skeleton VQE and QAOA use. Built in Qiskit, D-Wave Ocean, and quimb. Its organizing principle is honesty: every quantum kernel ships next to a competitive classical baseline on the same input, because as of 2026 nearly every quantum-advantage claim on a useful problem has been matched by an improved classical algorithm within a year or two. A repo that shows quantum results in isolation teaches the wrong mental model.
 - **Financial Analysis Agent System** — a multi-user finance dashboard aggregating Schwab, Coinbase, and Finnhub, with two AI layers: a Claude Code `/invest` skill for portfolio analysis and an in-app Gemini agent with read/write access to user preferences. Next.js 16, Supabase with row-level security.
 - **Kalshi Investment Assistant** — an autonomous edge-finding engine running 10 strategies across 40,000+ prediction markets every five minutes, fusing eight data sources over WebSocket fan-out, validated against paper trading.
-- **PrintGen** — an AI 3D-print marketplace: text- and image-to-3D generation feeding a local Bambu Lab printer pipeline that slices and prints over the LAN. The fun of it is crossing the software-to-physical-hardware boundary.
 
 There are 20-some of these. Quantum cybersecurity, financial systems, AI tooling, networking, 3D printing and IoT, prediction markets — same person, different domains. I pick up whatever the problem requires.
 

@@ -1,5 +1,5 @@
 /* ============================================================
-   Ask David — chat widget (vanilla JS, no deps)
+   Ask David: chat widget (vanilla JS, no deps)
    Talks to the Cloudflare Worker set in #chatbot-root[data-endpoint].
    If the endpoint is missing/placeholder, the widget never appears.
    ============================================================ */
@@ -13,7 +13,7 @@
   if (!ENDPOINT || ENDPOINT.indexOf("REPLACE") !== -1) return;
 
   var GREETING =
-    "Hi — I'm Ask David, an AI guide to David Morgan. Ask me about his work, his projects, what he's looking for, or how to get in touch.";
+    "Hi, I'm Ask David, an AI guide to David Morgan. Ask me about his work, his projects, what he's looking for, or how to get in touch.";
   var CHIPS = [
     "What does David work on?",
     "Tell me about the quantum starter kit",
@@ -33,7 +33,7 @@
 
   // ---- DOM scaffolding ----
   root.innerHTML =
-    '<button class="cb-launcher" type="button" aria-label="Open chat — ask about David">' +
+    '<button class="cb-launcher" type="button" aria-label="Open chat, ask about David">' +
     '<span class="cb-launcher-label">Ask about David</span>' +
     '<span class="cb-launcher-btn">' + ICON_CHAT + "</span>" +
     "</button>" +
@@ -52,7 +52,7 @@
     '<textarea class="cb-input" rows="1" placeholder="Ask about David…" aria-label="Type your question"></textarea>' +
     '<button class="cb-send" type="submit" aria-label="Send">' + ICON_SEND + "</button>" +
     "</form>" +
-    '<p class="cb-footer-note">AI can be imperfect — for anything important, <a href="mailto:davidjmorgan26@gmail.com">email David</a>.</p>' +
+    '<p class="cb-footer-note">AI can be imperfect; for anything important, <a href="mailto:davidjmorgan26@gmail.com">email David</a>.</p>' +
     "</section>";
 
   var launcher = root.querySelector(".cb-launcher");
@@ -199,9 +199,13 @@
       chip.className = "cb-chip";
       chip.textContent = q;
       chip.style.animationDelay = i * 0.05 + "s";
-      chip.addEventListener("click", function () {
+      var fire = function (e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        // disable so a double-tap can't fire it twice
+        for (var k = 0; k < chipsEl.children.length; k++) chipsEl.children[k].disabled = true;
         send(q);
-      });
+      };
+      chip.addEventListener("click", fire);
       chipsEl.appendChild(chip);
     });
   }
@@ -260,7 +264,7 @@
             .then(function (j) {
               var msg =
                 j.message ||
-                "Sorry — I couldn't reach the model just now. Try again in a moment, or email David at davidjmorgan26@gmail.com.";
+                "Sorry, I couldn't reach the model just now. Try again in a moment, or email David at davidjmorgan26@gmail.com.";
               bubble.innerHTML = renderBot(msg);
               finish(msg);
             });
@@ -298,7 +302,7 @@
       })
       .catch(function () {
         bubble.innerHTML = renderBot(
-          "Sorry — something went wrong reaching the assistant. Please try again, or email David at davidjmorgan26@gmail.com."
+          "Sorry, something went wrong reaching the assistant. Please try again, or email David at davidjmorgan26@gmail.com."
         );
         endBusy();
       });

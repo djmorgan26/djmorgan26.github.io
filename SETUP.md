@@ -1,10 +1,10 @@
-# SETUP.md — Getting GitHub Pages Live
+# SETUP.md: Getting GitHub Pages Live
 
 Step-by-step setup for `djmorgan26.github.io`. Follow in order.
 
 ## 1. Create the GitHub repo
 
-Repo name must be **exactly** `djmorgan26.github.io` — that's what tells Pages to serve from the root.
+Repo name must be **exactly** `djmorgan26.github.io`; that's what tells Pages to serve from the root.
 
 - Visibility: **Public** (required for free Pages)
 - Initialize with a README: skip (this bundle has its own files)
@@ -44,7 +44,7 @@ This setup means **the only thing that triggers a redeploy is a push or merged P
 
 This is the desired behavior. The mental model is simple: **anything on `main` is live; nothing else is.** Use other branches freely for in-progress work.
 
-If David ever wants preview deploys (e.g., a draft hosted at a temporary URL before merging), that requires migrating to "GitHub Actions" as the Pages source and adding a workflow. Don't do this without an explicit request — the current setup is intentionally minimal.
+If David ever wants preview deploys (e.g., a draft hosted at a temporary URL before merging), that requires migrating to "GitHub Actions" as the Pages source and adding a workflow. Don't do this without an explicit request; the current setup is intentionally minimal.
 
 ## 4. Local development (optional but recommended)
 
@@ -63,7 +63,7 @@ bundle exec jekyll serve
 
 If `bundle install` fails on Ruby version mismatch, install `rbenv` and use Ruby 3.1+.
 
-## 5. Custom domain (deferred — staying on default for now)
+## 5. Custom domain (deferred; staying on default for now)
 
 **Default decision (May 2026): stick with `djmorgan26.github.io`.** It's free, immediately functional, and reads as legitimate on a resume. Frontier-lab recruiters click GitHub-hosted personal sites all the time. No reason to spend money or time on a custom domain before the site has shipped content.
 

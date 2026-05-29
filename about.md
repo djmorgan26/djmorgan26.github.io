@@ -76,4 +76,9 @@ A team of fast-moving builders I can both contribute to and learn from, where wo
 
 If that sounds like your team, I'd love to talk.
 
-[GitHub](https://github.com/djmorgan26) · [LinkedIn](https://linkedin.com/in/davidjmorgan26) · [davidjmorgan26@gmail.com](mailto:davidjmorgan26@gmail.com) · [Resume]({{ '/resume/' | relative_url }})
+<p class="social-icons about-socials" role="list">
+  <a href="https://github.com/djmorgan26" aria-label="GitHub" title="GitHub" role="listitem">{% include icon-github.svg %}</a>
+  <a href="https://linkedin.com/in/davidjmorgan26" aria-label="LinkedIn" title="LinkedIn" role="listitem">{% include icon-linkedin.svg %}</a>
+  <a href="mailto:davidjmorgan26@gmail.com" aria-label="Email David" title="Email David" role="listitem">{% include icon-mail.svg %}</a>
+  <a href="{{ '/resume/' | relative_url }}" aria-label="Resume" title="Resume" role="listitem">{% include icon-file.svg %}</a>
+</p>

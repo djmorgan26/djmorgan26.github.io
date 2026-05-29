@@ -10,7 +10,7 @@
         <a href="{{ '/' | relative_url }}">writing</a>
         <a href="{{ '/about/' | relative_url }}">about</a>
         <a href="{{ '/resume/' | relative_url }}">resume</a>
-        <a href="https://github.com/{{ site.github_username }}">github</a>
+        <a class="nav-icon" href="https://github.com/{{ site.github_username }}" aria-label="GitHub" title="GitHub">{% include icon-github.svg %}</a>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle light/dark">
           <span class="t-sun" aria-hidden="true">☀</span><span class="t-moon" aria-hidden="true">☾</span>
         </button>
@@ -25,10 +25,10 @@
   <footer class="site-footer">
     <div class="bar">
       <span>© {{ site.time | date: "%Y" }} {{ site.author }}</span>
-      <span class="dots">
-        <a href="https://github.com/{{ site.github_username }}">GitHub</a>
-        <a href="https://linkedin.com/in/{{ site.linkedin_username }}">LinkedIn</a>
-        <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <span class="social-icons footer-socials">
+        <a href="https://github.com/{{ site.github_username }}" aria-label="GitHub" title="GitHub">{% include icon-github.svg %}</a>
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" aria-label="LinkedIn" title="LinkedIn">{% include icon-linkedin.svg %}</a>
+        <a href="{{ '/feed.xml' | relative_url }}" aria-label="RSS feed" title="RSS feed">{% include icon-rss.svg %}</a>
       </span>
     </div>
   </footer>

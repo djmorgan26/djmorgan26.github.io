@@ -95,6 +95,8 @@ a:hover { color: var(--accent-2); }
   color: var(--muted);
 }
 .site-nav a:hover { color: var(--accent); }
+.site-nav .nav-icon { display: inline-flex; align-items: center; padding: 4px; }
+.site-nav .nav-icon svg { width: 18px; height: 18px; display: block; }
 
 .theme-toggle {
   appearance: none; border: 1px solid var(--line); background: transparent;
@@ -317,6 +319,37 @@ a:hover { color: var(--accent-2); }
 .site-footer .dots { display: flex; gap: 18px; }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--accent); }
+
+/* ---- social icon rows (footer + about page) ---- */
+.social-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.social-icons a {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color .15s ease, transform .15s ease;
+}
+.social-icons a:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.social-icons svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.about-socials {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 22px;
+}
+.about-socials svg { width: 24px; height: 24px; }
 
 /* ============================================================
    RESUME

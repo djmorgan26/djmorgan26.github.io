@@ -5,6 +5,8 @@
   "description": "Cloudflare Worker powering the 'Ask David' chatbot on djmorgan26.github.io",
   "scripts": {
     "dev": "wrangler dev",
+    "build:context": "node scripts/build-context.mjs",
+    "predeploy": "node scripts/build-context.mjs",
     "deploy": "wrangler deploy",
     "tail": "wrangler tail"
   },

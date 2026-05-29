@@ -6,13 +6,15 @@
   <header class="site-header">
     <div class="bar">
       <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      {%- assign nav_writing_active = false -%}
+      {%- if page.url == '/' or page.url contains '/20' -%}{%- assign nav_writing_active = true -%}{%- endif -%}
       <nav class="site-nav">
-        <a href="{{ '/' | relative_url }}">writing</a>
-        <a href="{{ '/about/' | relative_url }}">about</a>
-        <a href="{{ '/resume/' | relative_url }}">resume</a>
+        <a href="{{ '/' | relative_url }}"{% if nav_writing_active %} class="is-active" aria-current="page"{% endif %}>writing</a>
+        <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} class="is-active" aria-current="page"{% endif %}>about</a>
+        <a href="{{ '/resume/' | relative_url }}"{% if page.url == '/resume/' %} class="is-active" aria-current="page"{% endif %}>resume</a>
         <a class="nav-icon" href="https://github.com/{{ site.github_username }}" aria-label="GitHub" title="GitHub">{% include icon-github.svg %}</a>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle light/dark">
-          <span class="t-sun" aria-hidden="true">☀</span><span class="t-moon" aria-hidden="true">☾</span>
+          <span class="t-sun" aria-hidden="true">{% include icon-sun.svg %}</span><span class="t-moon" aria-hidden="true">{% include icon-moon.svg %}</span>
         </button>
       </nav>
     </div>

@@ -6,7 +6,7 @@ permalink: /about/
 
 <img src="{{ '/assets/img/headshot.jpg' | relative_url }}" alt="David Morgan" class="headshot">
 
-I'm a full-stack engineer at AT&T's Chief Data Office. I build production AI systems (orchestration platforms, agent tooling, document-ingestion pipelines) inside a company where security, compliance, and stakeholder management are not optional.
+I'm a Data/AI Engineer at AT&T's Chief Data Office. I build production AI systems (orchestration platforms, agent tooling, document-ingestion pipelines) inside a company where security, compliance, and stakeholder management are not optional.
 
 The thing I care about is the combination. I live at the front of the AI-tooling curve: early MCP adopter, design partner for AT&T's internal AI coding tool, part of a ~25-person design-partner cohort at Windsurf, and the go-to person for AI-fueled coding across the CDO. But I do that *while* shipping real work at enterprise scale. Most engineers I meet have one side or the other. I'm trying to be good at both, and this site is where I write about what that's taught me.
 

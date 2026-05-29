@@ -144,6 +144,14 @@
     if (lastOpen !== -1 && display.indexOf("]]", lastOpen) === -1) {
       display = display.slice(0, lastOpen);
     }
+    // Strip Markdown chrome the model sometimes adds even when told not to:
+    // - heading lines (### Foo)
+    // - solo bold pseudo-headings on their own line (**Foo:**)
+    // These render badly in a chat bubble; just drop them, the prose between still works.
+    display = display
+      .replace(/^[ \t]*#{1,6}[ \t]+.*$/gm, "")
+      .replace(/^[ \t]*\*\*[^*\n]+\*\*[ \t]*:?[ \t]*$/gm, "")
+      .replace(/\n{3,}/g, "\n\n");
     var cards = [];
     var buttons = [];
     var markerRe = /\[\[(button|card):([^\]]+)\]\]/g;

@@ -10,9 +10,28 @@ url: "https://djmorgan26.github.io"
 github_username: djmorgan26
 linkedin_username: davidjmorgan26
 
+# Social-share preview (jekyll-seo-tag picks these up):
+image:
+  path: /assets/img/og.png
+  width: 1200
+  height: 630
+  alt: "David Morgan, Data/AI Engineer at AT&T Chief Data Office"
+twitter:
+  card: summary_large_image
+social:
+  name: David Morgan
+  links:
+    - https://github.com/djmorgan26
+    - https://linkedin.com/in/davidjmorgan26
+
 # "Ask David" chatbot — Cloudflare Worker endpoint.
 # Leave blank to hide the widget. Set to the deployed Worker's /chat URL.
 chatbot_endpoint: "https://ask-david.djmorgan26.workers.dev/chat"
+
+# Cloudflare Web Analytics (privacy-friendly, no cookies, no consent banner).
+# Get a token at https://dash.cloudflare.com/?to=/:account/web-analytics
+# Leave blank to disable. Token is safe to commit (public beacon, not a secret).
+cloudflare_analytics_token: ""
 
 plugins:
   - jekyll-feed
@@ -24,6 +43,10 @@ permalink: /:year/:month/:day/:title.html
 
 # Defaults
 defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og.png
   - scope:
       path: ""
       type: "posts"

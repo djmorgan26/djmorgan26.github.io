@@ -31,7 +31,7 @@ chatbot_endpoint: "https://ask-david.djmorgan26.workers.dev/chat"
 # Cloudflare Web Analytics (privacy-friendly, no cookies, no consent banner).
 # Get a token at https://dash.cloudflare.com/?to=/:account/web-analytics
 # Leave blank to disable. Token is safe to commit (public beacon, not a secret).
-cloudflare_analytics_token: ""
+cloudflare_analytics_token: "488a7dce24be409a825d2eab4bd0f1f7"
 
 plugins:
   - jekyll-feed

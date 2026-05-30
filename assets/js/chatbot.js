@@ -92,11 +92,40 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
+  // Hosts the bot is allowed to link to in absolute form. Anything else (the
+  // model occasionally hallucinates URLs like 0.0.0.5/...) is rejected.
+  var URL_ALLOW = [
+    "djmorgan26.github.io",
+    "github.com", "www.github.com",
+    "linkedin.com", "www.linkedin.com",
+    "urfmp.vercel.app",
+    "ask-david.djmorgan26.workers.dev",
+  ];
+  // Posts the bot might link to with a missing date prefix (e.g. /measuring-ai-productivity.html).
+  // We map the bare slug back to the canonical permalink so the click works.
+  var POST_SLUGS = {
+    "the-bottleneck-has-moved": "/2026/05/24/the-bottleneck-has-moved.html",
+    "strategical-context-injection": "/2026/05/25/strategical-context-injection.html",
+    "measuring-ai-productivity": "/2026/05/28/measuring-ai-productivity.html",
+  };
+  function rewritePostSlug(path) {
+    var m = /^\/([a-z0-9-]+)\.html$/.exec(path);
+    if (m && POST_SLUGS[m[1]]) return POST_SLUGS[m[1]];
+    return path;
+  }
   function safeUrl(u) {
     u = String(u || "").trim();
-    if (u.charAt(0) === "/" || u.charAt(0) === "#") return u;
+    if (!u) return null;
+    if (u.charAt(0) === "#") return u;
+    if (u.charAt(0) === "/") return rewritePostSlug(u);
     if (/^mailto:/i.test(u)) return u;
-    if (/^https?:\/\//i.test(u)) return u;
+    if (/^https?:\/\//i.test(u)) {
+      try {
+        var url = new URL(u);
+        var host = url.hostname.toLowerCase();
+        if (URL_ALLOW.indexOf(host) !== -1) return u;
+      } catch (e) {}
+    }
     return null;
   }
   function extAttr(url) {
@@ -144,14 +173,15 @@
     if (lastOpen !== -1 && display.indexOf("]]", lastOpen) === -1) {
       display = display.slice(0, lastOpen);
     }
-    // Strip Markdown chrome the model sometimes adds even when told not to:
-    // - heading lines (### Foo)
-    // - solo bold pseudo-headings on their own line (**Foo:**)
-    // These render badly in a chat bubble; just drop them, the prose between still works.
+    // Strip Markdown chrome the model sometimes adds even when told not to.
     display = display
       .replace(/^[ \t]*#{1,6}[ \t]+.*$/gm, "")
       .replace(/^[ \t]*\*\*[^*\n]+\*\*[ \t]*:?[ \t]*$/gm, "")
-      .replace(/\n{3,}/g, "\n\n");
+      .replace(/\n{3,}/g, "\n\n")
+      // The model sometimes drops the leading "5" before "5G Experience Pass".
+      // Restore it whenever it wasn't already present (don't double up).
+      .replace(/(^|[^0-9])G Experience Pass/g, "$15G Experience Pass")
+      .replace(/(^|[^0-9])GEP\b/g, function (_, prev) { return prev + "5GEP"; });
     var cards = [];
     var buttons = [];
     var markerRe = /\[\[(button|card):([^\]]+)\]\]/g;
@@ -339,8 +369,10 @@
               if (!data || data === "[DONE]") continue;
               try {
                 var j = JSON.parse(data);
-                if (typeof j.response === "string") {
-                  full += j.response;
+                if (j.response !== undefined && j.response !== null) {
+                  // Workers AI occasionally streams a token as a number ("26") rather than a string.
+                  // Coerce so the digit ends up in the output instead of getting dropped.
+                  full += String(j.response);
                   schedule();
                 }
               } catch (e) {}

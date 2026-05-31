@@ -239,6 +239,17 @@ export default {
         },
       });
     } catch (err) {
+      console.log("AI_ERROR", err && (err.stack || err.message || String(err)));
+      var msg = String((err && (err.message || err)) || "");
+      // Workers AI returns 4006 when the daily free-tier neuron quota is exhausted.
+      // Show a tailored message so the visitor knows it is not a permanent failure.
+      if (/4006|neuron/i.test(msg)) {
+        return json(
+          { error: "rate_limited", message: "Ask David is taking a quick break. The chatbot resets at midnight UTC. In the meantime, email David at davidjmorgan26@gmail.com or read his writing." },
+          503,
+          origin
+        );
+      }
       return json(
         { error: "ai_error", message: "Something went wrong reaching the model. Please try again in a moment." },
         502,

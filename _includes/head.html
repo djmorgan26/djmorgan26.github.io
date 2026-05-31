@@ -20,7 +20,7 @@
   {%- comment -%} Load Google Fonts async so they don't block first paint. display=swap + the preload+print-onload pattern means the body renders instantly in the fallback stack, then upgrades to Fraunces/Inter/Newsreader/Mono once they arrive. {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {%- assign google_fonts = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" -%}
+  {%- assign google_fonts = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" -%}
   <link rel="preload" as="style" href="{{ google_fonts }}">
   <link rel="stylesheet" href="{{ google_fonts }}" media="print" onload="this.media='all'; this.onload=null;">
   <noscript><link rel="stylesheet" href="{{ google_fonts }}"></noscript>

@@ -7,10 +7,10 @@
     <div class="bar">
       <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
       {%- assign nav_writing_active = false -%}
-      {%- if page.url == '/' or page.url contains '/20' -%}{%- assign nav_writing_active = true -%}{%- endif -%}
+      {%- if page.url == '/writing/' or page.url contains '/20' -%}{%- assign nav_writing_active = true -%}{%- endif -%}
       <nav class="site-nav">
-        <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} class="is-active" aria-current="page"{% endif %}>About</a>
-        <a href="{{ '/' | relative_url }}"{% if nav_writing_active %} class="is-active" aria-current="page"{% endif %}>Writing</a>
+        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="is-active" aria-current="page"{% endif %}>About</a>
+        <a href="{{ '/writing/' | relative_url }}"{% if nav_writing_active %} class="is-active" aria-current="page"{% endif %}>Writing</a>
         <a href="{{ '/resume/' | relative_url }}"{% if page.url == '/resume/' %} class="is-active" aria-current="page"{% endif %}>Resume</a>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle light/dark">
           <span class="t-sun" aria-hidden="true">{% include icon-sun.svg %}</span><span class="t-moon" aria-hidden="true">{% include icon-moon.svg %}</span>

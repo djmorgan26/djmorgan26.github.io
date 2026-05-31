@@ -16,7 +16,7 @@ const repoRoot = resolve(here, "..", "..");
 const out = resolve(here, "..", "src", "context.js");
 
 const sources = [
-  { path: "about.md", url: "/about/", label: "About page" },
+  { path: "index.md", url: "/", label: "Home / About page" },
   { path: "resume.md", url: "/resume/", label: "Resume" },
 ];
 

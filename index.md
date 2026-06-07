@@ -46,7 +46,7 @@ A few markers that the work is actually landing: 5/5 ratings on both performance
 
 ## On my own time
 
-I build a lot of small things to keep my intuitions sharp. The breadth is deliberate; it's how I learn what these tools can and can't actually do.
+I build a lot of small things to keep my intuitions sharp. The breadth is deliberate; it's how I learn what these tools can and can't actually do. The headline ones, with live no-login demos, are on the [projects page]({{ '/projects/' | relative_url }}).
 
 - **PrintGen.** An AI 3D-print marketplace: text- and image-to-3D generation feeding a local Bambu Lab printer pipeline that slices and prints over the LAN. The fun of it is crossing the software-to-physical-hardware boundary.
 - **URFMP (Universal Robot Fleet Management Platform).** A fleet-management platform for industrial robots from heterogeneous vendors (UR, ABB, FANUC). TypeScript monorepo, PostgreSQL, Docker. Live demo dashboard at [urfmp.vercel.app](https://urfmp.vercel.app) running a simulated fleet, no login.

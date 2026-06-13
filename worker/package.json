@@ -8,7 +8,9 @@
     "build:context": "node scripts/build-context.mjs",
     "predeploy": "node scripts/build-context.mjs",
     "deploy": "wrangler deploy",
-    "tail": "wrangler tail"
+    "tail": "wrangler tail",
+    "test": "node --test test/*.test.mjs",
+    "eval": "node test/eval.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

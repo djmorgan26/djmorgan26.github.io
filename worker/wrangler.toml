@@ -7,6 +7,13 @@ workers_dev = true
 [ai]
 binding = "AI"
 
+# Free fallback provider (Groq, free tier). Used only when Cloudflare errors or
+# its shared daily neuron quota is exhausted (error 4006), so the bot stays up.
+# The API key is a secret: `npx wrangler secret put GROQ_API_KEY` (NOT stored
+# here). If the secret is unset, the Worker runs CF-only, exactly as before.
+[vars]
+GROQ_MODEL = "llama-3.3-70b-versatile"
+
 # KV namespace used for per-IP rate limiting.
 # `id` is filled in after `wrangler kv namespace create RL`.
 [[kv_namespaces]]

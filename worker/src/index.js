@@ -12,6 +12,19 @@ import { SITE_CONTEXT } from "./context.js";
 
 const MODEL = "@cf/meta/llama-4-scout-17b-16e-instruct";
 
+// Free fallback provider. Cloudflare's free Workers AI tier shares one daily
+// "neuron" quota across all of its models (exhaustion = error 4006), so when it
+// runs out the whole bot goes dark and a second CF model would not help. Groq's
+// free tier is a completely separate quota pool, so when CF errors we retry
+// there and stay up, still at $0. Set the key with `wrangler secret put
+// GROQ_API_KEY`; if it is unset the behavior is unchanged (CF only). The model
+// can be overridden with a GROQ_MODEL var in wrangler.toml.
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const GROQ_MODEL = "llama-3.3-70b-versatile";
+
+// Shared generation params so both providers answer with the same shape.
+const GEN_PARAMS = { max_tokens: 700, temperature: 0.4 };
+
 // Origins allowed to call this Worker: the live site, plus any localhost port
 // for local development (Jekyll, a static preview server, etc.).
 const PROD_ORIGIN = "https://djmorgan26.github.io";
@@ -167,6 +180,77 @@ function json(body, status, origin) {
   });
 }
 
+function sseResponse(stream, origin) {
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      ...corsHeaders(origin),
+    },
+  });
+}
+
+// Calls Groq (OpenAI-compatible) and reshapes its SSE into the exact
+// `data: {"response":"..."}` frames the CF model emits, so the browser widget
+// needs zero changes no matter which provider actually answered. Throws if Groq
+// is unreachable or returns a non-2xx, so the caller can surface a clean error.
+async function streamFromGroq(env, messages) {
+  const res = await fetch(GROQ_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.GROQ_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: env.GROQ_MODEL || GROQ_MODEL,
+      messages,
+      stream: true,
+      ...GEN_PARAMS,
+    }),
+  });
+  if (!res.ok || !res.body) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`groq_http_${res.status}: ${detail.slice(0, 200)}`);
+  }
+
+  // Pump the upstream reader inside start() (not pull()): reading an inner
+  // reader from within pull() deadlocks against the platform's backpressure.
+  const reader = res.body.getReader();
+  const dec = new TextDecoder();
+  const enc = new TextEncoder();
+  let buf = "";
+  return new ReadableStream({
+    async start(controller) {
+      try {
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          const lines = buf.split("\n");
+          buf = lines.pop();
+          for (const line of lines) {
+            const t = line.trim();
+            if (t.indexOf("data:") !== 0) continue;
+            const data = t.slice(5).trim();
+            if (!data || data === "[DONE]") continue;
+            try {
+              const tok = JSON.parse(data).choices?.[0]?.delta?.content;
+              if (tok) controller.enqueue(enc.encode(`data: ${JSON.stringify({ response: tok })}\n\n`));
+            } catch {}
+          }
+        }
+      } catch {
+        // Upstream cut out mid-stream: end cleanly with what we have.
+      }
+      controller.enqueue(enc.encode("data: [DONE]\n\n"));
+      controller.close();
+    },
+    cancel(reason) {
+      reader.cancel(reason);
+    },
+  });
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
@@ -221,28 +305,37 @@ export default {
 
     const aiMessages = [{ role: "system", content: SYSTEM_PROMPT }, ...messages];
 
+    // Primary: Cloudflare Workers AI (free, no key). It returns an SSE
+    // ReadableStream (data: {"response":"..."}\n\n ... data: [DONE]) we pass
+    // straight through.
     try {
       const stream = await env.AI.run(MODEL, {
         messages: aiMessages,
         stream: true,
-        max_tokens: 700,
-        temperature: 0.4,
+        ...GEN_PARAMS,
       });
-
-      // Workers AI already returns an SSE-formatted ReadableStream
-      // (data: {"response":"..."}\n\n ... data: [DONE]). Pass it straight through.
-      return new Response(stream, {
-        headers: {
-          "Content-Type": "text/event-stream",
-          "Cache-Control": "no-cache",
-          ...corsHeaders(origin),
-        },
-      });
+      return sseResponse(stream, origin);
     } catch (err) {
-      console.log("AI_ERROR", err && (err.stack || err.message || String(err)));
+      console.log("AI_PRIMARY_ERROR", err && (err.stack || err.message || String(err)));
+
+      // Free fallback: retry on Groq's independent quota so a CF outage or an
+      // exhausted daily neuron quota (4006) does not take the bot down. Only
+      // attempted when a key is configured; otherwise behavior is unchanged.
+      if (env.GROQ_API_KEY) {
+        try {
+          const stream = await streamFromGroq(env, aiMessages);
+          return sseResponse(stream, origin);
+        } catch (fallbackErr) {
+          console.log(
+            "AI_FALLBACK_ERROR",
+            fallbackErr && (fallbackErr.stack || fallbackErr.message || String(fallbackErr))
+          );
+        }
+      }
+
+      // Both providers are down (or no fallback configured). Surface a clean
+      // message, keeping the tailored copy for the daily-quota case.
       var msg = String((err && (err.message || err)) || "");
-      // Workers AI returns 4006 when the daily free-tier neuron quota is exhausted.
-      // Show a tailored message so the visitor knows it is not a permanent failure.
       if (/4006|neuron/i.test(msg)) {
         return json(
           { error: "rate_limited", message: "Ask David is taking a quick break. The chatbot resets at midnight UTC. In the meantime, email David at davidjmorgan26@gmail.com or read his writing." },

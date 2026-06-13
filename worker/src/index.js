@@ -38,7 +38,7 @@ const RATE_WINDOW_SECONDS = 600; // 10 minutes
 const MAX_MESSAGES = 24; // conversation turns accepted in one request
 const MAX_CHARS = 2000; // per-message character cap
 
-const SYSTEM_PROMPT = `You are "Ask David", a careful, honest assistant embedded on David Morgan's personal site (djmorgan26.github.io). Visitors are often recruiters, hiring managers, or engineers at frontier AI labs and big tech. Your job is to help them learn about David from the FACTS section below, and to point them to the right page or contact.
+const SYSTEM_BASE = `You are "Ask David", a careful, honest assistant embedded on David Morgan's personal site (djmorgan26.github.io). Visitors are often recruiters, hiring managers, or engineers at frontier AI labs and big tech. Your job is to help them learn about David from the FACTS section below, and to point them to the right page or contact.
 
 HONESTY OVER COMPLETENESS
 Confabulation (generating plausible-sounding details that aren't actually in your context) is unacceptable here. If a fact is not stated in the FACTS section or in the DOCUMENTS section at the bottom of this prompt, you do not know it. Do not guess, infer, extrapolate, or fill in. A short "I'm not sure about that" is always preferable to an invented answer. David has explicitly asked you to default to "I'm not sure" rather than inventing details.
@@ -154,13 +154,22 @@ WHAT HE'S LOOKING FOR
 A team of fast-moving builders he can contribute to and learn from, where working at the bleeding edge of AI is the default and enterprise-scale, battle-tested experience is an asset, not baggage. Most interested in frontier AI labs (Anthropic, OpenAI, and the teams building the tools the rest of us code with) and strong big-tech / quantum teams. If a visitor's team sounds like that, encourage them to reach out.
 
 CONTACT
-Email davidjmorgan26@gmail.com, GitHub github.com/djmorgan26, LinkedIn linkedin.com/in/davidjmorgan26. When someone asks how to reach him, give the email and offer the resume.
+Email davidjmorgan26@gmail.com, GitHub github.com/djmorgan26, LinkedIn linkedin.com/in/davidjmorgan26. When someone asks how to reach him, give the email and offer the resume.`;
+
+// Full prompt = FACTS + the entire site as DOCUMENTS (~13k tokens). That is fine
+// for Cloudflare, but it exceeds the Groq free tier's 12k tokens/minute limit
+// (which 413'd the fallback). So the primary uses the full prompt and the Groq
+// fallback uses the lite one (FACTS only, no DOCUMENTS): small enough to fit,
+// and still fully grounded since FACTS already covers the common questions.
+const SYSTEM_PROMPT = `${SYSTEM_BASE}
 
 =========================
 DOCUMENTS (the full text of David's website, treat as ground truth)
 =========================
 
 ${SITE_CONTEXT}`;
+
+const SYSTEM_PROMPT_LITE = SYSTEM_BASE;
 
 function corsHeaders(origin) {
   const allow = isAllowedOrigin(origin) ? origin : PROD_ORIGIN;
@@ -323,7 +332,9 @@ export default {
       // attempted when a key is configured; otherwise behavior is unchanged.
       if (env.GROQ_API_KEY) {
         try {
-          const stream = await streamFromGroq(env, aiMessages);
+          // Lite prompt (FACTS only) to stay under Groq's free token/minute cap.
+          const liteMessages = [{ role: "system", content: SYSTEM_PROMPT_LITE }, ...messages];
+          const stream = await streamFromGroq(env, liteMessages);
           return sseResponse(stream, origin);
         } catch (fallbackErr) {
           console.log(

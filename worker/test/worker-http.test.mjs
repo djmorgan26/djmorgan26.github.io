@@ -202,6 +202,8 @@ test("valid request streams an event-stream response", async () => {
   // Model gets the system prompt first, then the user turn, with the tuned params.
   const opts = calls.ai[0].opts;
   assert.equal(opts.messages[0].role, "system");
+  // Cloudflare gets the full prompt, including the whole-site DOCUMENTS section.
+  assert.match(opts.messages[0].content, /DOCUMENTS \(the full text/);
   assert.equal(opts.messages.at(-1).content, "What does David work on?");
   assert.equal(opts.stream, true);
   assert.equal(opts.max_tokens, 700);
@@ -280,6 +282,12 @@ test("falls back to Groq when Cloudflare errors, reshaping its stream", async ()
       const sent = JSON.parse(fetchCalls[0].init.body);
       assert.equal(sent.stream, true);
       assert.equal(sent.messages[0].role, "system");
+      // The fallback must use the lite prompt (FACTS only, no full-site
+      // DOCUMENTS), or Groq's free token/minute cap 413s the request.
+      assert.ok(
+        !sent.messages[0].content.includes("DOCUMENTS (the full text"),
+        "fallback should not send the full-site DOCUMENTS block to Groq"
+      );
       assert.equal(sent.messages.at(-1).content, "hi");
     }
   );

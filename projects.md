@@ -54,9 +54,9 @@ featured:
       that is the demo.
     repo: https://github.com/djmorgan26/djmorgan26.github.io
 more:
-  - name: ContextVault
-    desc: a deployed context-management tool for AI-assisted development
-    url: https://context-vault-beige.vercel.app
+  - name: fantasy-football-assistant
+    desc: a fantasy football app with a live view of games across all your leagues
+    url: https://github.com/djmorgan26/fantasy-football-assistant
   - name: MCPBuilder
     desc: a visual builder for custom MCP servers
     url: https://github.com/djmorgan26/MCPBuilder

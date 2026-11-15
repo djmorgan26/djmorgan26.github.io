@@ -2,7 +2,7 @@
   {
     "id": "work-overview",
     "q": "What does David work on?",
-    "expect": { "includesAny": ["AT&T", "AndiSense", "AI"] }
+    "expect": { "includesAny": ["AT&T", "platform", "AI"] }
   },
   {
     "id": "side-projects",

@@ -177,11 +177,7 @@
     display = display
       .replace(/^[ \t]*#{1,6}[ \t]+.*$/gm, "")
       .replace(/^[ \t]*\*\*[^*\n]+\*\*[ \t]*:?[ \t]*$/gm, "")
-      .replace(/\n{3,}/g, "\n\n")
-      // The model sometimes drops the leading "5" before "5G Experience Pass".
-      // Restore it whenever it wasn't already present (don't double up).
-      .replace(/(^|[^0-9])G Experience Pass/g, "$15G Experience Pass")
-      .replace(/(^|[^0-9])GEP\b/g, function (_, prev) { return prev + "5GEP"; });
+      .replace(/\n{3,}/g, "\n\n");
     var cards = [];
     var buttons = [];
     var markerRe = /\[\[(button|card):([^\]]+)\]\]/g;

@@ -142,7 +142,3 @@ test("renderBot: card title is HTML-escaped (no injection via marker body)", () 
   assert.match(html, /&lt;script&gt;/);
 });
 
-test("renderBot: restores the dropped leading 5 in 5G / 5GEP", () => {
-  assert.match(R.renderBot("He built the G Experience Pass."), /5G Experience Pass/);
-  assert.match(R.renderBot("He built GEP for venues."), /5GEP/);
-});

@@ -2,6 +2,7 @@
 layout: resume
 title: Resume
 permalink: /resume/
+pdf: /assets/David-Morgan-Resume.pdf
 ---
 
 AI-native engineer who ships with Claude Code, MCP, Copilot and agent orchestration inside a 200,000-person regulated enterprise. Technical lead of a ~10-person team building a multi-tenant enterprise platform on Kubernetes, took a live-event connectivity platform to production in about five months as its primary developer, and architected an AI-native delivery framework that applies AI across all seven phases of the software lifecycle. Built production platforms behind **$3M+ in annual savings** and 540 automated test files across three major 2026 programs. Recognized by AT&T's CTO on a company-wide broadcast.
@@ -34,14 +35,14 @@ AI-native engineer who ships with Claude Code, MCP, Copilot and agent orchestrat
 
 ## Selected Projects
 
-- **Financial Analysis Agent System** (Next.js 16, Supabase + RLS). Multi-user finance dashboard aggregating Schwab, Coinbase, and Finnhub with dual AI layers: a Claude Code `/invest` skill for portfolio analysis and an in-app Gemini agent with read/write access to user preferences.
+- **Financial Analysis Agent System** (Next.js, Supabase with row-level security): multi-user finance dashboard aggregating Schwab, Coinbase and Finnhub, with a Claude Code portfolio-analysis skill and an in-app Gemini agent.
 - **Kalshi Investment Assistant** (WebSocket fan-out, 8-source data fusion): autonomous edge-finding engine running 10 strategies across 40,000+ prediction markets every five minutes, validated against paper trading.
-- **PrintGen** (Next.js, TypeScript), an AI-powered 3D-print marketplace with text/image-to-3D generation and a local Bambu Lab printer pipeline.
+- **PrintGen** (Next.js, TypeScript): AI-powered 3D-print marketplace with text and image to 3D generation and a local Bambu Lab printer pipeline.
 
 ## Education
 
 **University of Georgia, Terry College of Business.** M.S. Business Analytics, 2024 (GPA 3.85, Magna Cum Laude); B.B.A. Finance with Data Analytics emphasis, 2023 (GPA 3.73, Cum Laude).
 
-## Technical Skills
+## Skills
 
 Python, TypeScript, SQL · React, Next.js, FastAPI, Flask, Node.js · Claude Code, GitHub Copilot, Devin, Codex, Windsurf, MCP servers, agent orchestration, Azure OpenAI, Ollama · Azure, Kubernetes, Helm, Terraform, Entra ID, GitHub Actions, Grafana, Prometheus, Databricks, PostgreSQL, MongoDB · Certifications: Azure DP-900, AI-900.

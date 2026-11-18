@@ -9,7 +9,7 @@ AI-native engineer who ships with Claude Code, MCP, Copilot and agent orchestrat
 
 ## Experience
 
-### AT&T, Senior Data/AI Engineer, Chief Data Office
+### AT&T, Senior AI / Data Engineer, Chief Data Office
 *Atlanta, GA · Feb 2026 – Present*
 
 - **Technical lead and application architect** of a confidential, multi-tenant enterprise orchestration platform on Kubernetes, guiding a ~10-person team of engineers and contractors, most more senior, from planning and governance approval through Azure environment build-out, networking and delivery; reached a working multi-tenant environment serving multiple organizational groups in about four months, on Helm, Terraform, Entra ID, PostgreSQL, Redis and GitHub Actions with Grafana, Prometheus, Loki and Tempo observability, versioned releases and 166 automated test files covering load, penetration and chaos testing against SLAs.

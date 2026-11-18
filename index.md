@@ -4,7 +4,7 @@ layout: page
 
 <img src="{{ '/assets/img/headshot.jpg' | relative_url }}" alt="David Morgan" class="headshot">
 
-I'm a Senior Data/AI Engineer at AT&T's Chief Data Office. I build production AI systems (orchestration platforms, agent tooling, document-ingestion pipelines) inside a company where security, compliance, and stakeholder management are not optional.
+I'm a Senior AI / Data Engineer at AT&T's Chief Data Office. I build production AI systems (orchestration platforms, agent tooling, document-ingestion pipelines) inside a company where security, compliance, and stakeholder management are not optional.
 
 The thing I care about is the combination. I live at the front of the AI-tooling curve: early MCP adopter, design partner for AT&T's internal AI coding tool, part of a ~25-person design-partner cohort at Windsurf, and the go-to person for AI-fueled coding across the CDO. But I do that *while* shipping real work at enterprise scale. Most engineers I meet have one side or the other. I'm trying to be good at both, and this site is where I write about what that's taught me.
 
@@ -12,7 +12,7 @@ This page is the longer version of my [resume]({{ '/resume/' | relative_url }}):
 
 ## At AT&T
 
-I started at AT&T in the Technology Development Program in 2024 and moved into a Senior Data/AI Engineer role in the Chief Data Office in early 2026. The pattern across both has been the same: take on the thing nobody else has untangled yet, ship it end-to-end, then turn it into something the rest of the org can reuse.
+I started at AT&T in the Technology Development Program in 2024 and moved into a Senior AI / Data Engineer role in the Chief Data Office in early 2026. The pattern across both has been the same: take on the thing nobody else has untangled yet, ship it end-to-end, then turn it into something the rest of the org can reuse.
 
 ### Platforms I've built
 
@@ -44,7 +44,7 @@ Some of the things I'm proudest of were the org-level work I picked up alongside
 
 ### How the work has landed
 
-A few markers that the work is actually landing: the CTO callout on a company-wide broadcast mentioned above, being cited as a best-practice example for AI-assisted engineering in the org, and the move into my current Senior Data/AI Engineer role in February 2026. The point isn't the recognition; it's that the work is being measured and the measurements line up.
+A few markers that the work is actually landing: the CTO callout on a company-wide broadcast mentioned above, being cited as a best-practice example for AI-assisted engineering in the org, and the move into my current Senior AI / Data Engineer role in February 2026. The point isn't the recognition; it's that the work is being measured and the measurements line up.
 
 ## On my own time
 
@@ -66,7 +66,7 @@ There are 20-some of these in total. Quantum cybersecurity, financial systems, A
 
 I started at AT&T as a summer intern in 2021 and stayed across three summers and a four-year Technology Development Program track. The middle internship was on a quantum-cybersecurity team (one of four interns) supporting the government-mandated migration of 24,000+ applications to quantum-safe encryption, presenting to VPs and the CISO on Grover's Algorithm and cryptographic agility. That's where the quantum interest started.
 
-In February 2026 I transitioned out of TDP into a Senior Data/AI Engineer role in the Chief Data Office, which is where I am now. Most of the AT&T work above sits inside that arc.
+In February 2026 I transitioned out of TDP into a Senior AI / Data Engineer role in the Chief Data Office, which is where I am now. Most of the AT&T work above sits inside that arc.
 
 I studied at the University of Georgia's Terry College of Business: an M.S. in Business Analytics (Magna Cum Laude) and a B.B.A. in Finance (Cum Laude, Zell Miller Scholarship). The finance background is why so many of my side projects end up pointed at markets. I also hold the Microsoft Azure Data Fundamentals (DP-900) and Azure AI Fundamentals (AI-900) certifications.
 

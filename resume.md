@@ -24,7 +24,7 @@ Builds production AI platforms inside a 200,000-person regulated enterprise and 
 
 - As sole developer, built an **AI-powered SDLC and project-management platform** that replaced a vendor tool for **$3M+ in annual savings**; called out by AT&T's CTO on a company-wide broadcast.
 - Rebuilt a **national network-analytics platform** as sole developer, the backbone of a data pipeline supporting **$52M+ in reported business benefits**.
-- Led a team building a Power Apps and Power Automate **calendar system** on SharePoint and Teams that posts every event change to the team chat; built about 95% of it and trained others to maintain it.
+- Led a team building a Power Apps and Power Automate **calendar system** on SharePoint and Teams, used daily by **100+ TDP members** and expanding nationally; built about 95% of it and trained others to maintain it.
 - Built a **RAG tool that analyzes software license contracts**; placed **top 3 in a GenAI hackathon** with a solo-built, locally hosted LLM for network-config analysis; led the Databricks Runtime and Unity Catalog migration.
 
 ### AT&T, Rotational Internship Program

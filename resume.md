@@ -22,8 +22,9 @@ Builds production AI platforms inside a 200,000-person regulated enterprise and 
 ### AT&T, Technology Development Program, Chief Data Office
 *Atlanta, GA · 2024 – 2026*
 
-- As sole developer, built an **AI-powered SDLC and project-management platform** (React/TypeScript, FastAPI, PostgreSQL on Azure) that replaced a vendor tool for **$3M+ in annual savings**; called out by AT&T's CTO on a company-wide broadcast.
-- Rebuilt a **national network-analytics platform** as sole developer (React, FastAPI, MongoDB), the backbone of a data pipeline supporting **$52M+ in reported business benefits**.
+- As sole developer, built an **AI-powered SDLC and project-management platform** that replaced a vendor tool for **$3M+ in annual savings**; called out by AT&T's CTO on a company-wide broadcast.
+- Rebuilt a **national network-analytics platform** as sole developer, the backbone of a data pipeline supporting **$52M+ in reported business benefits**.
+- Built about 95% of a Power Automate, SharePoint and Teams **calendar system** that posts event changes to the team chat; used daily by **100+ Atlanta TDP members** and expanding to the national program.
 - Placed **top 3 in a GenAI hackathon** with a solo-built, locally hosted LLM for network-config analysis; led the Databricks Runtime and Unity Catalog migration.
 
 ### AT&T, Rotational Internship Program
@@ -33,8 +34,8 @@ Builds production AI platforms inside a 200,000-person regulated enterprise and 
 
 ## Selected Projects
 
-- **Kalshi Investment Assistant:** engine running 10 strategies across 40,000+ prediction markets every five minutes, validated by paper trading.
-- **Financial Analysis Agent System:** multi-user Schwab, Coinbase and Finnhub dashboard with Claude Code and Gemini analysis agents.
+- **Kalshi Investment Assistant:** 10 strategies scanning 40,000+ prediction markets every five minutes, paper-traded.
+- **Financial Analysis Agent System:** Schwab, Coinbase and Finnhub dashboard with Claude and Gemini agents.
 
 ## Education
 

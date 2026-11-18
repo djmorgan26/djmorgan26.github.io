@@ -70,4 +70,4 @@ But right now, in June 2026, every harness offers auto-routing and none of them 
 
 ---
 
-*David Morgan is a Data/AI Engineer at AT&T's Chief Data Office, where he builds production AI systems and orchestration platforms. More writing at [djmorgan26.github.io](https://djmorgan26.github.io); code at [github.com/djmorgan26](https://github.com/djmorgan26).*
+*David Morgan is a Senior AI / Data Engineer at AT&T's Chief Data Office, where he builds production AI systems and orchestration platforms. More writing at [djmorgan26.github.io](https://djmorgan26.github.io); code at [github.com/djmorgan26](https://github.com/djmorgan26).*

@@ -94,4 +94,4 @@ The flywheel is spinning up. The only real question is how fast — and that's a
 
 ---
 
-*David Morgan is a Senior AI / Data Engineer at AT&T's Chief Data Office, where he builds production AI systems and orchestration platforms. This post is analysis, not investment advice. More writing at [djmorgan26.github.io](https://djmorgan26.github.io); code at [github.com/djmorgan26](https://github.com/djmorgan26).*
+*David Morgan is a Senior Data/AI Engineer at AT&T's Chief Data Office, where he builds production AI systems and orchestration platforms. This post is analysis, not investment advice. More writing at [djmorgan26.github.io](https://djmorgan26.github.io); code at [github.com/djmorgan26](https://github.com/djmorgan26).*

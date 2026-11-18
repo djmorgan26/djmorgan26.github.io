@@ -9,7 +9,7 @@ Engineer who has shipped AI and non-AI platforms end to end in a 200,000-person 
 
 ## Experience
 
-### AT&T, Senior AI / Data Engineer, Chief Data Office
+### AT&T, Senior Data/AI Engineer, Chief Data Office
 *Atlanta, GA · Feb 2026 – Present*
 
 - **Technical lead and architect** of a confidential multi-tenant orchestration platform on Kubernetes; guided a ~10-person team, most more senior, from governance approval through Azure build-out to a working environment in about four months, with 166 test files covering load, penetration and chaos testing.

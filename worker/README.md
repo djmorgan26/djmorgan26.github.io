@@ -32,6 +32,21 @@ browser is unchanged.
 
 - Model is set by `GROQ_MODEL` in `wrangler.toml` (default `llama-3.3-70b-versatile`).
 
+## What it knows
+
+`scripts/build-context.mjs` (run automatically before every deploy) reads the
+site and writes `src/context.js`:
+
+- **WRITING_INDEX**: every post in `_posts/`, newest first, with its date, url
+  and one-line summary (the post's `description` front matter). This goes into
+  every prompt, so a new post is known the moment you deploy.
+- **SITE_CHUNKS**: the About page, resume and posts split into heading-sized
+  sections. Each request sends only the sections that best match the visitor's
+  question (simple keyword scoring, no extra service), instead of the whole site.
+
+So to teach the bot something new, publish it on the site and redeploy the Worker.
+Give each new post a one-line `description:` in its front matter.
+
 ## Files
 
 - `src/index.js`: the Worker: CORS lock, KV rate limit, system prompt, streaming proxy.

@@ -4,6 +4,7 @@ title: "Developing at Enterprise Scale: What the Job Really Looks Like in the Ag
 date: 2026-11-18
 author: David Morgan
 excerpt: "A white paper on what it really looks like to be a developer inside a large enterprise in the age of AI: owning a project from the first requirement to production, moving fast inside a company built for safety and scale."
+description: "A white paper on what a developer's job really looks like inside a large enterprise in the age of AI, across twelve areas from planning and requirements to governance and production."
 ---
 
 *The views here are my own and don't represent my employer.*

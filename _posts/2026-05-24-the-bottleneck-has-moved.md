@@ -3,6 +3,7 @@ layout: post
 title: "The bottleneck has moved"
 date: 2026-05-24
 author: David Morgan
+description: "Most agent failures now come from missing context, not weak models: the bottleneck has moved from the AI to the person telling it what they want."
 ---
 
 

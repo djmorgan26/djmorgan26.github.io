@@ -3,6 +3,7 @@ layout: post
 title: "Strategical Context Injection: the unifying frame for skills, workflows, prompts, and .md files"
 date: 2026-05-25
 author: David Morgan
+description: "Skills, workflows, prompts, MCP servers and CLAUDE.md files are one primitive, injected context, and using it well is the highest-leverage AI skill to learn next."
 ---
 
 I switched between three AI coding tools last year, and somewhere in the middle of it I stopped having to relearn anything.

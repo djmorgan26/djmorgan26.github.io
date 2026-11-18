@@ -3,6 +3,7 @@ layout: post
 title: "Auto doesn't mean smart"
 date: 2026-06-19
 author: David Morgan
+description: "Auto model routing in today's coding tools mostly manages capacity rather than matching the task, and task-aware routing is genuinely hard to build."
 ---
 
 I've tried auto-routing in every major harness I use regularly. Cursor, Copilot, Windsurf, Claude Code. The result is the same every time: it picks wrong. Not occasionally — consistently, in both directions. Send it a complex multi-file refactor and it reaches for a fast cheap model. Ask it a simple factual question and it fires up the most capable model in the pool. The task complexity and the model selection have no reliable relationship.

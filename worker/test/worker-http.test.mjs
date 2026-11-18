@@ -202,12 +202,13 @@ test("valid request streams an event-stream response", async () => {
   // Model gets the system prompt first, then the user turn, with the tuned params.
   const opts = calls.ai[0].opts;
   assert.equal(opts.messages[0].role, "system");
-  // Cloudflare gets the full prompt, including the whole-site DOCUMENTS section.
-  assert.match(opts.messages[0].content, /DOCUMENTS \(the full text/);
+  // Cloudflare gets FACTS + WRITING plus the site excerpts relevant to the question.
+  assert.match(opts.messages[0].content, /WRITING \(every post on this site/);
+  assert.match(opts.messages[0].content, /EXCERPTS \(passages from David's site/);
   assert.equal(opts.messages.at(-1).content, "What does David work on?");
   assert.equal(opts.stream, true);
-  assert.equal(opts.max_tokens, 700);
-  assert.equal(opts.temperature, 0.4);
+  assert.equal(opts.max_tokens, 500);
+  assert.equal(opts.temperature, 0.3);
 });
 
 test("history is clamped to the last 24 turns", async () => {
@@ -282,11 +283,11 @@ test("falls back to Groq when Cloudflare errors, reshaping its stream", async ()
       const sent = JSON.parse(fetchCalls[0].init.body);
       assert.equal(sent.stream, true);
       assert.equal(sent.messages[0].role, "system");
-      // The fallback must use the lite prompt (FACTS only, no full-site
-      // DOCUMENTS), or Groq's free token/minute cap 413s the request.
+      // The fallback must stay small (a smaller excerpt budget), or Groq's
+      // free tokens-per-minute cap 413s the request. ~28k chars is ~7k tokens.
       assert.ok(
-        !sent.messages[0].content.includes("DOCUMENTS (the full text"),
-        "fallback should not send the full-site DOCUMENTS block to Groq"
+        sent.messages[0].content.length < 28000,
+        `fallback prompt too large for Groq: ${sent.messages[0].content.length} chars`
       );
       assert.equal(sent.messages.at(-1).content, "hi");
     }
@@ -339,6 +340,63 @@ test("when both providers fail on a generic error, returns 502", async () => {
       const res = await worker.fetch(req("/chat", { body: userMsg("hi") }), env);
       assert.equal(res.status, 502);
       assert.equal((await res.json()).error, "ai_error");
+    }
+  );
+});
+
+// --------------------------------------------------------------------------
+// Knowledge: writing index, retrieval and prompt size
+// --------------------------------------------------------------------------
+import { WRITING_INDEX, SITE_CHUNKS } from "../src/context.js";
+import { retrieve, buildSystemPrompt } from "../src/index.js";
+import { readdirSync } from "node:fs";
+
+test("writing index lists every post, newest first", () => {
+  const posts = readdirSync(new URL("../../_posts/", import.meta.url)).filter((f) => /^\d{4}-\d{2}-\d{2}-.+\.md$/.test(f));
+  const lines = WRITING_INDEX.split("\n").filter((l) => /^\d+\. "/.test(l));
+  assert.equal(lines.length, posts.length);
+  const newest = posts.sort().at(-1).replace(/^(\d{4})-(\d{2})-(\d{2})-(.+)\.md$/, "/$1/$2/$3/$4.html");
+  assert.ok(lines[0].includes(newest), `first line should be the newest post: ${lines[0]}`);
+  assert.match(lines[0], /\[NEWEST\]/);
+});
+
+test("the prompt sent to the model carries the writing index and stays small", async () => {
+  const { env, calls } = makeEnv();
+  await worker.fetch(req("/chat", { body: userMsg("What's David's newest paper about?") }), env);
+  const system = calls.ai[0].opts.messages[0].content;
+  assert.ok(system.includes(WRITING_INDEX), "writing index missing from the prompt");
+  // The old prompt shipped the whole site (~120k chars). Keep it well under that.
+  assert.ok(system.length < 40000, `system prompt too large: ${system.length} chars`);
+});
+
+test("retrieval finds the paper from a loose description", () => {
+  const hits = retrieve("Can you see the one about developing at an enterprise company", 9000);
+  assert.ok(hits.length > 0);
+  assert.match(hits[0].url, /developing-at-enterprise-scale/);
+});
+
+test("a 'newest' question retrieves the newest post", () => {
+  const newestUrl = WRITING_INDEX.match(/^1\. ".+?" \(.+?\) (\S+)/)[1];
+  const hits = retrieve("What's his latest paper about in 10 words", 9000);
+  assert.equal(hits[0].url, newestUrl);
+});
+
+test("no internal project names reach the model", () => {
+  const banned = /AndiSense|\bNAAP\b|\b5GEP\b|Experience Pass/i;
+  assert.ok(!banned.test(WRITING_INDEX));
+  assert.ok(!SITE_CHUNKS.some((c) => banned.test(c.text)));
+  assert.ok(!banned.test(buildSystemPrompt([{ role: "user", content: "What has David built at AT&T?" }], 9000)));
+});
+
+test("the Groq fallback also gets the writing index", async () => {
+  const { env } = makeEnv({ ai: () => { throw new Error("boom"); }, groqKey: "k" });
+  await withMockFetch(
+    () => new Response(openaiStream(["ok"]), { status: 200, headers: { "Content-Type": "text/event-stream" } }),
+    async (calls) => {
+      const res = await worker.fetch(req("/chat", { body: userMsg("newest paper?") }), env);
+      await readSse(res);
+      const sent = JSON.parse(calls[0].init.body).messages[0].content;
+      assert.ok(sent.includes(WRITING_INDEX));
     }
   );
 });

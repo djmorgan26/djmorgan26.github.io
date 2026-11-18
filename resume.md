@@ -5,7 +5,7 @@ permalink: /resume/
 pdf: /assets/David-Morgan-Resume.pdf
 ---
 
-Builds production AI platforms inside a 200,000-person regulated enterprise and leads the org in shipping with AI coding agents, MCP and agent orchestration, from governance approval to production.
+Engineer who has shipped AI and non-AI platforms end to end in a 200,000-person regulated enterprise as architect, developer, DevOps engineer and product owner, and who is ahead of most in using AI coding agents, MCP and agent orchestration to build whatever the work needs.
 
 ## Experience
 
